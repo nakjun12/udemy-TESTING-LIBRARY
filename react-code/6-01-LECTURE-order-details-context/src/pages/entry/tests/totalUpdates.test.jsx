@@ -1,5 +1,5 @@
-import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import Options from "../Options";
 
 test("update scoop subtotal when scoops change", async () => {
@@ -8,6 +8,8 @@ test("update scoop subtotal when scoops change", async () => {
 
   // make sure total starts out $0.00
   const scoopsSubtotal = screen.getByText("Scoops total: $", { exact: false });
+//일치하지 않아도 괜찮다.
+
   expect(scoopsSubtotal).toHaveTextContent("0.00");
 
   // update vanilla scoops to 1 and check the subtotal

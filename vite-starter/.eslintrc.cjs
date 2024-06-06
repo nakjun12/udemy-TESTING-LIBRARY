@@ -1,4 +1,4 @@
-import vitest from "eslint-plugin-vitest";
+const vitest = require("eslint-plugin-vitest");
 
 module.exports = {
   root: true,
@@ -9,6 +9,7 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:vitest/recommended",
+    "plugin:jest-dom/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
@@ -19,6 +20,9 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
   },
   globals: {
     ...vitest.environments.env.globals,

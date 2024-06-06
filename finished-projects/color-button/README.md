@@ -39,6 +39,7 @@ In _.eslintrc.cjs_:
 ```js
    'plugin:testing-library/react',
    'plugin:vitest/recommended',
+   'plugin:jest-dom/recommended',
 ```
 
 1. Add this property / value to the top-level `module.exports` object:
@@ -49,6 +50,16 @@ In _.eslintrc.cjs_:
         ...vitest.environments.env.globals,
       },
     },
+```
+
+## Update a few ESLint rules
+
+Add these to the `rules` object in _.eslintrc.cjs_:
+
+```js
+    "no-unused-vars": "warn", // warning, not error
+    "vitest/expect-expect": "off", // eliminate distracting red squiggles while writing tests
+    "react/prop-types": "off", // turn off props validation
 ```
 
 **Note**: if you're having issues getting ESLint to work properly with VSCode, please see [this troubleshooting guide](https://dev.to/bonnie/eslint-prettier-and-vscode-troubleshooting-ljh).
@@ -62,9 +73,10 @@ Update _vite.config.js_ based on the [Vitest Testing Library example](https://gi
     globals: true,
     environment: "jsdom",
     // this points to the setup file created earlier
-    setupFiles: "./test/setup.js",
-    // you might want to disable it, if you don't have tests that rely on CSS
-    // since parsing CSS is slow
+    setupFiles: "./src/setup.js",
+    // you might want to disable the `css: true` line, since we don't have
+    // tests that rely on CSS -- and parsing CSS is slow.
+    // I'm leaving it in here becasue often people want to parse CSS in tests.
     css: true,
   },
 ```
